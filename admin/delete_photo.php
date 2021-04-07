@@ -6,8 +6,9 @@
     }
     if (isset($_GET['id']) && !empty($_GET['id'])){
         $photo = new Photo();
-        if ($photo->delete($_GET['id'])) {
+        if ($photo->delete_photo($_GET['id'])) {
             echo "Image deleted successfully";
+            redirect("photos.php");
         }else {
             redirect("photos.php");
         }

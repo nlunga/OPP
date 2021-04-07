@@ -37,6 +37,14 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- WYSIWYG -->
+    <script src="https://cdn.tiny.cloud/1/78jl2mm6ejw3clvfqovlyfi615zqz28cjdgqr6oy8yusv8bg/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+        selector: '#description'
+        });
+  </script>
+    
     <link rel="stylesheet" href="css/custom-styles.css">
 
 </head>

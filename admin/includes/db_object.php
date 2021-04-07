@@ -2,7 +2,7 @@
     class Db_object {
 
         protected static $db_table = "users";
-        protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name');
+        protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name', 'user_image');
 
 
         public static function find_all() {
@@ -123,10 +123,6 @@
             foreach ($properties as $key => $value) {
                 $property_pairs[] = "{$key}='{$value}'";
             }
-            $new_username = $database->clean_input($this->username);
-            $new_password = $database->clean_input($this->password);
-            $new_first_name = $database->clean_input($this->first_name);
-            $new_last_name = $database->clean_input($this->last_name);
             // $id = $database->clean_input($this->id);
             $sql = "UPDATE " . static::$db_table . " SET ".implode(",", $property_pairs)." WHERE id={$this->id}";
             return ($database->query($sql)) ? true: false;

@@ -1,11 +1,13 @@
 <?php
     class Photo extends Db_object {
         protected static $db_table = "photos";
-        protected static $db_table_fields = array('title', 'description', 'filename', 'type', 'size');
+        protected static $db_table_fields = array('title', 'caption', 'description', 'filename', 'alternate_text', 'type', 'size');
         public $id;
         public $title;
+        public $caption;
         public $description;
         public $filename;
+        public $alternate_text;
         public $type;
         public $size;
 
@@ -75,6 +77,15 @@
                     $this->errors[] = "The file directory probably does not have permissions or it does not exist";
                     return false;
                 }
+            }
+        }
+
+        public function delete_photo($id) {
+            if ($this->delete($id)) {
+                $target_path = SITE_ROOT.DS.'admin'.DS.$this->picture_path();
+                return unlink($target_path) ? true : false;
+            } else {
+                return false;
             }
         }
 

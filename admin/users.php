@@ -25,8 +25,8 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Users
-                            <small>Subheading</small>
                         </h1>
+                        <a href="add_user.php" class="btn btn-primary">Add User</a>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-users"></i>  <a href="users.php">Users</a>
@@ -38,6 +38,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
+                                    <th>Photo</th>
                                     <th>Username</th>
                                     <th>Firstname</th>
                                     <th>Lastname</th>
@@ -48,11 +50,20 @@
                                 <?php
                                     $users = new User();
                                     $user_result = $users->find_all();
+                                    
 
                                     foreach ($user_result as $value) {
                                         # code...
                                         echo "<tr>";
-                                        echo    "<td>" . $value->username . "</td>";
+                                        echo    "<td>" . $value->id . "</td>";
+                                        echo    "<td><img src='". $value->user_image_placeholder() ."' class='profileImage'>" ."</td>";
+                                        echo    "<td>" . $value->username;
+                                        echo        "<div class='pictures_link'>";
+                                        echo            "<a href='delete_user.php?id=" . $value->id . "'>Delete</a>";
+                                        echo            "<a href='edit_user.php?id=" . $value->id ."'>Edit</a>";
+                                        echo            "<a href='#'>View</a>";
+                                        echo        "</div>";
+                                        echo    "</td>";
                                         echo    "<td>" . $value->first_name . "</td>";
                                         echo    "<td>" . $value->last_name . "</td>";
                                         echo "</tr>";
