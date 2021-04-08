@@ -9,11 +9,12 @@
         $user = new User();
         $user->username = $_POST['username'];
         $user->first_name = $_POST['first_name'];
-        $user->user_image = $_POST['user_image'];
+        // $user->user_image = $_POST['user_image'];
         $user->last_name = $_POST['last_name'];
         $user->password = $_POST['password'];
         $user->set_file($_FILES['user_image']);
         $user->save_user_image();
+        redirect('users.php');
     }
 
 

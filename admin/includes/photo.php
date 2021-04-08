@@ -83,7 +83,11 @@
         public function delete_photo($id) {
             if ($this->delete($id)) {
                 $target_path = SITE_ROOT.DS.'admin'.DS.$this->picture_path();
-                return unlink($target_path) ? true : false;
+                if (unlink($target_path)) {
+                    return true;
+                }else {
+                    return false;
+                }
             } else {
                 return false;
             }

@@ -59,9 +59,8 @@
                                         echo    "<td><img src='". $value->user_image_placeholder() ."' class='profileImage'>" ."</td>";
                                         echo    "<td>" . $value->username;
                                         echo        "<div class='pictures_link'>";
-                                        echo            "<a href='delete_user.php?id=" . $value->id . "'>Delete</a>";
+                                        echo            "<a href='delete_user.php?id=" . $value->id . "'>Delete </a>";
                                         echo            "<a href='edit_user.php?id=" . $value->id ."'>Edit</a>";
-                                        echo            "<a href='#'>View</a>";
                                         echo        "</div>";
                                         echo    "</td>";
                                         echo    "<td>" . $value->first_name . "</td>";

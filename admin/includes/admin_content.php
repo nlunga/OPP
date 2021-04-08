@@ -18,10 +18,16 @@
                 
                 // $user->check_entry();
 
-                $photo->title = "The Daily Show";
-                $photo->description = "The Daily Show is an Emmy and Peabody Award-winning program that looks at the day's top headlines through a sharp, reality-based lens. Along with the help ...";
-                $photo->filename = "trevor.png";
-                $photo->type = "image";
+                // $photo->title = "The Daily Show";
+                // $photo->description = "The Daily Show is an Emmy and Peabody Award-winning program that looks at the day's top headlines through a sharp, reality-based lens. Along with the help ...";
+                // $photo->filename = "trevor.png";
+                // $photo->type = "image";
+                // $photo->size = 29;
+
+                $photo->title = "This is a test";
+                $photo->description = "This is a test Description";
+                $photo->filename = "test.jpg";
+                $photo->type = "image/jpg";
                 $photo->size = 29;
                 // echo DS . '<br>';
                 // echo SITE_ROOT . '<br>';

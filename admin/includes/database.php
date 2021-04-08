@@ -49,10 +49,18 @@
                 $result = $this->connection->prepare($sql);
                 $result->execute();
                 $check = $result->fetchAll(PDO::FETCH_ASSOC);
+                $delete_pattern = "/DELETE/i";
+                $update_pattern = "/UPDATE/i";
+                $insert_pattern = "/INSERT/i";
+                
                 if ($check) {
                     return $check;
                 }else {
-                    return true;
+                    if (count($check) === 0 && !preg_match($delete_pattern, $sql) && !preg_match($update_pattern, $sql) && !preg_match($insert_pattern, $sql)) {
+                        return false;
+                    }else {
+                        return true;
+                    }
                 }
             } catch (PDOException $err) {
                 die("Something went wrong" . $err);

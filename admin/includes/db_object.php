@@ -4,6 +4,32 @@
         protected static $db_table = "users";
         protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name', 'user_image');
 
+        public $errors = array();
+        public $upload_errors_array = array(
+            UPLOAD_ERR_OK => "There is no error, the file uploaded with success.",
+            UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini.",
+            UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
+            UPLOAD_ERR_PARTIAL => "The uploaded file was only partially uploaded.",
+            UPLOAD_ERR_NO_FILE => "No file was uploaded.",
+            UPLOAD_ERR_NO_TMP_DIR => "Missing a temporary folder. Introduced in PHP 5.0.3.",
+            UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk. Introduced in PHP 5.1.0.",
+            UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload."
+        );
+
+        public function set_file($file) {
+
+            if (empty($file) || !$file || !is_array($file)) {
+                $this->errors[] = "There was no file uploaded here<br>";
+                return false;
+            }else if ($file['error'] != 0) {
+                $this->errors[] = $this->upload_errors_array[$file['error']];
+            }else {
+                $this->user_image = basename($file['name']);
+                $this->tmp_path = $file['tmp_name'];
+                $this->type = $file['type'];
+                $this->size = $file['size'];
+            }
+        }
 
         public static function find_all() {
             return self::find_by_query("SELECT * FROM " . static::$db_table . " ");
@@ -32,10 +58,10 @@
             global $database;
             $obj_array = array();
 
-            $result_set = $database->query($sql);
-
-            for ($index=0; $index < count($result_set); $index++) {
-                $obj_array[$index] = static::instantiate($result_set[$index]);
+            if ($result_set = $database->query($sql)) {
+                for ($index=0; $index < count($result_set); $index++) {
+                    $obj_array[$index] = static::instantiate($result_set[$index]);
+                }
             }
 
             return $obj_array;
@@ -103,7 +129,7 @@
                     $this->id = $database->get_last_id();
                     // $session->user_id = $this->id = $database->get_last_id();
                     // $session->signed_in = true;
-                    redirect("index.php");
+                    // redirect("index.php");
                     return true;
                 }
             } else {

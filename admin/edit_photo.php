@@ -101,7 +101,7 @@
                                         Filename: <span class="data"><?php echo $photos->filename; ?></span>
                                     </p>
                                     <p class="text">
-                                    File Type: <span class="data">JPG</span>
+                                    File Type: <span class="data"><?php echo $photos->type; ?></span>
                                     </p>
                                     <p class="text">
                                     File Size: <span class="data"><?php echo $photos->size; ?></span>
